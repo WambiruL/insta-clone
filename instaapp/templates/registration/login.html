@@ -2,32 +2,26 @@
 {% load bootstrap4 %}
 {% block content %}
 {% load static %}
-<div class="container mt-4">
+<div class="container-log mt-4">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-title mt-4">
-                   <h2 style="text-align: center;">INSTAGRAM</h2>
-                </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5 mt-4">
+            <div class="card ">
                 <div class="card-body mb-3 mr-3 ml-3">
-                    <p class="text-center">Sign up to see photos and videos from your friends.
-                    </p>
                     <form action="" method="post" novalidate>
                         {% csrf_token %}
-                        {% bootstrap_form form %}
-                        <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
+                        {% bootstrap_form form%}
+                        <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
                     </form>
                 </div>
-                <p class="mr-4 ml-4 mb-2 text-center">By signing up, you agree to our Terms , Data Policy and Cookies
-                    Policy.</p>
+                <a href="" class="D-block mx-auto mb-3">Forgot password? </a>
             </div>
             <div class="card mt-2">
-                <div class="card-body mt-3 mb-2 mr-3 ml-3">
-                    <p style="text-align: center;">Have an account? <a href="">Log in</a></p>
+                <div class="card-body mt-3 mb-3 mr-2 ml-4">
+                    Don't have an account? <a href="">Sign up</a>
                 </div>
             </div>
-            <div container>
+            <div class="container">
                 <p class="text-center mt-4">Get the app</p>
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -41,8 +35,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4"></div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 
