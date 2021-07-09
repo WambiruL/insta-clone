@@ -1,39 +1,44 @@
-{%extends "registration/base.html"%} {% load bootstrap4 %}
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
 {% block content %}
-<div class="container">
-  <div class="row">
-    <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      {% if form.errors %}
-        <p> Some Information Might be Incorrect </p>
-      {% endif %}
-      <div class="panel panel-default">
-
-        <div class="panel-heading">
-          <h3 class="text-center">Sign Up</h3>
-        </div>
-        <div class="panel-body">
-
-          <form  action="/accounts/register/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+{% load static %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-title mt-4">
+                   <h2 style="text-align: center;">INSTAGRAM</h2>
+                </div>
+                <div class="card-body mb-3 mr-3 ml-3">
+                    <p class="text-center">Sign up to see photos and videos from your friends.
+                    </p>
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
+                    </form>
+                </div>
+                <p class="mr-4 ml-4 mb-2 text-center">By signing up, you agree to our Terms , Data Policy and Cookies
+                    Policy.</p>
             </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
+            <div container>
+                <p class="text-center mt-4">Get the app</p>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5 mb-2">
+                        <a href="https://apps.apple.com/app/instagram/id389801252?vt=lo"><img src="{% static 'Images/getappstore.png' %}" alt="" width="100%" class="download"></a>
+                    </div>
+                    <div class="col-md-5 mb-2">
+                        <a href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb&utm_campaign=signupPage&ig_mid=BF2AFA44-D32F-4497-BE25-359BEEB74BD2&utm_content=lo&utm_medium=badge"><img src="{% static 'Images/GOOGLEPLAY.png.png' %}" alt="" width="100%" class="download"></a>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
         </div>
 
-      </div>
-
+        <div class="col-md-4"></div>
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
-  </div>
 </div>
 
 {% endblock %}

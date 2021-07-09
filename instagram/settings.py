@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     #installed
     'instaapp',
-    'bootstrap4'
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
