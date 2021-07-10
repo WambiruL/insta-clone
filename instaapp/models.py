@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Image(models.Model):
@@ -27,3 +28,12 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
+
+class Profile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    image=models.ImageField(default='default.jpeg', upload_to='Profilepics/')
+    bio = models.TextField(max_length=500, default="My Bio", blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
