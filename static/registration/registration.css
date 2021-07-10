@@ -1,0 +1,8 @@
+body{
+    font-family: 'Acme', sans-serif;
+    background-color: whitesmoke;
+    
+}
+.col-md-5{
+    position: relative;
+}

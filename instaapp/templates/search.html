@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<div class="container" style="margin-top:7%">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% if results %}
+            <h5 class="text-center">Found {{ search|length }} user{{ search|pluralize }}</h5>
+            {% else %}
+            <h5 class="text-center"> Found 0 user with username <strong>{{message}}</strong></h5>
+
+            <a class="d-block mx-auto" href="/">
+                <button class="btn btn-sm btn-info d-block mx-auto">Back Home</button>
+            </a>
+            {% endif %}
+            <hr>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+
+{% endblock %}

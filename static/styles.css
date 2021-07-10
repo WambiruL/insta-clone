@@ -1,8 +1,7 @@
-
 body{
-    font-family: 'Acme', sans-serif;
-    background-color: whitesmoke;
+    background-color: blue;
 }
-.col-md-5{
-    position: relative;
+nav{
+    background-color: whitesmoke;
+    
 }
