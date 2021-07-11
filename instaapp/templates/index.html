@@ -4,6 +4,9 @@
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   {% endblock %}
   {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -60,13 +63,12 @@
             {% for image in images %}
             <div class="card mb-4">
                 <div class="card-title">
-                    <img src="{{user.profile.profile_image.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
-                         alt="{{image.user.user.username}}" width="35" height="35">
+                    <img src="{{user.profile.profile_image.url}}" class="rounded-circle border ml-3 mt-2  mr-3" alt="{{image.user.user.username}}" width="35" height="35">
+                    <p style="position: relative; left: 70px; bottom: 30px;">{{image.user.user.username}}</p>
                 </div>
-                <div class="card" style="max-width: 400px; display: block;margin-left: auto; margin-right: auto;width: 40%;">
-                    <img class="card-img-top" src="{{image.image.url}}" > 
-                    <div class="card-body"></div>
-                    <p>{{image.caption}}</p>
+                <div class="" style="max-width: 650px; display: block;margin-left: auto; margin-right: auto;">
+                    <img class="card-img-top" src="{{image.image.url}}"> <br>
+                    <p style="position: relative; left: 10px; top: 50px;">{{image.user.user.username}}:{{image.caption}}</p>
                     <br><br>
                 </div>
 
