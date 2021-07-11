@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   {% endblock %}
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
 {% block content %}
 
 <!--Navbar-->
@@ -37,7 +40,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="post" novalidate>
+                                <form action="" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {% bootstrap_form form %}
                                     <button type="submit" class="btn btn-primary btn-sm"> Upload</button>

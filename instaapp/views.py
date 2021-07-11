@@ -13,9 +13,9 @@ def index(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            images = form.save(commit=False)
-            images.user = request.user.profile
-            images.save()
+            post = form.save(commit=False)
+            post.user = request.user.profile
+            post.save()
             return HttpResponseRedirect(request.path_info)
     else:
         form = ImageForm()
