@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            {% if results %}
-            <h5 class="text-center">Found {{ search|length }} user{{ search|pluralize }}</h5>
+            {% if profiles %}
+            <h5 class="text-center">Found {{ profiles|length }} user{{ profiles|pluralize }}</h5>
             {% else %}
             <h5 class="text-center"> Found 0 user with username <strong>{{message}}</strong></h5>
 
