@@ -66,6 +66,29 @@
                     <p>{{image.caption}}</p>
                     <br><br>
                 </div>
+
+                <form method="POST" action="{% url 'post_comment' id=image.id %}">
+                    {% csrf_token %}
+                    <input type="text" name = "comments_body">
+                    <input type="submit" >        
+            </form>
+                
+            <h5>Comments</h5>
+
+            {% for comment in comments %}
+            {% if comment.id == image.id %}
+    
+            <div class="comments">
+            <div class="date">Posted: {{ comment.created_on }}</div>
+            <strong>Author:{{ comment.author }}</strong>
+            <p>{{ comment.body }}</p>
+    
+            </div>
+            
+            {% endif %}
+    
+            {% endfor %}
+               
             </div>
             {% endfor %}
            

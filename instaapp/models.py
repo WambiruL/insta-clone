@@ -62,5 +62,18 @@ class Image(models.Model):
         return self.name
 
 
+class Comment(models.Model):
+    comment = models.TextField()
+    image= models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.name} Post'
+
+    class Meta:
+        ordering = ["-pk"]
+
+
 
 

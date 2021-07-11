@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from .forms import ImageForm
+from .forms import ImageForm, CommentForm
 from django.http import HttpResponseRedirect
 
 
@@ -56,4 +56,23 @@ def profile(request):
     }
         
     return render(request,'profile.html', context)
+
+def post_comment(request, id):
+    image = get_object_or_404(Image, pk=id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            savecomment = form.save(commit=False)
+            savecomment.post = image
+            savecomment.user = request.user.profile
+            savecomment.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = CommentForm()
+    params = {
+        'image': image,
+        'form': form,
+    }
+    return render(request, 'single_image.html', params)
+
 
