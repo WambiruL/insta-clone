@@ -64,7 +64,7 @@ class Image(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField()
-    image= models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    image= models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments', null=True,blank=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
