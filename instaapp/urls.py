@@ -6,4 +6,5 @@ urlpatterns=[
     url(r'^search/', views.search, name='search'),
     url(r'^profile/<username>/', views.profile, name='profile'),
     url(r'^images/(?P<id>\d+)/comment', views.post_comment, name = 'post_comment'),
+   
 ]

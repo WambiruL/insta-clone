@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
@@ -39,8 +39,18 @@ def search(request):
     return render(request, 'search.html', {'message': message})
 
 def profile(request):
-    u_form=UserUpdateForm()
-    p_form=ProfleUpdateForm()
+    if request.method=='POST':
+        u_form=UserUpdateForm(request.POST,instance=request.user)
+        p_form=ProfleUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+        return redirect('profile')
+
+    else:
+        u_form=UserUpdateForm(instance=request.user)
+        p_form=ProfleUpdateForm(instance=request.user.profile)
 
     context={
         'u_form':u_form,

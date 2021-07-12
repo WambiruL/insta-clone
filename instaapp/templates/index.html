@@ -1,6 +1,8 @@
 {% load static %}
 {% load bootstrap4 %}
+{%load crispy_forms_tags%}
 {% block styles %}
+  
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -8,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   {% endblock %}
-  {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} {% endblock %}
+  
+
+
 {% block content %}
 
 <!--Navbar-->
@@ -85,10 +87,6 @@
                     {% empty %}
                     {% endfor %}
                     <p class="text-secondary ml-4">{{image.created|timesince}}</p>
-                    <div class='commentsection'>
-                        <input type='text' id='cmnt' placeholder='Add a comment...'>
-                        <span class='dot02'></span>
-                    </div>
                 </div>
             </div>
             {% endfor %}    
@@ -102,7 +100,7 @@
                 </div>
                 <div class="col-md-6 user-detail">
                     <span class=" text-secondary">
-                    <span class=" inname" style="color: black;"><a href="{% url 'user_profile' %}">{{ user.username }}</a></span>
+                    <span class=" inname" style="color: black;"><a href="{% url 'profile' %}">{{ user.username }}</a></span>
                 </div>
             </div>
                 <div class="col-md-2"></div>
@@ -116,4 +114,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 {% endblock %}
+{% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
 

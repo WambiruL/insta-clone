@@ -1,20 +1,59 @@
-{%extends "base.html"%}
-{% load bootstrap4 %}
+{%extends 'index.html'%}
+{% load crispy_forms_tags %}
 {%block content%}
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" style="color: black;" href="#"><h3><strong>INSTAGRAM</strong></h3></a>
+
+    <!--Search-->
+
+    <form class="mb-0 h1 ml-auto mr-auto" role="search" action="{% url 'search' %}" >
+        <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search">
+       <i class="spinner "></i>
+   </form>
+</nav>
 <div class="content-section">
     <div class="media">
-        <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+        <img class="rounded-circle account-img" style="width: 100px;" src="{{user.profile.profile_image.url}}">
         <div class="media-body">
             <h2 class="account-heading">{{user.username}}</h2>
             <p class="text-secondary">{{user.email}}</p>
             <p class="text-danger">{{user.bio}}</p>
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">More options<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="{%url 'index'%}">Home</a>
+                    </li>
+                    <li>
+                      <a href="/accounts/password/change">Change Password</a>
+                    </li>
+                    <li>
+                      <a href="/logout">Logout</a>
+                    </li>
+                  </ul>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <a class="btn btn-sm btn-outline-secondary mr-3" data-toggle="modal" data-target="#edit"><strong>Edit Profile</strong></a>
+
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md ">
+            <div class="modal-content">
+                <form action="" method="post" enctype="multipart/form-data" style="text-align: center;">
+                    {% csrf_token%}
+                    {{ u_form|crispy}}
+                    <br>
+                    {{ p_form|crispy}}
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
+                </form>
+            </div>
         </div>
     </div>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% u_bootstrap_form form %}
-        {% p_bootstrap_form form %}
-        <button type="submit" class="btn btn-primary btn-sm">Update Profile</button>
-    </form>
+   
 </div>
 {%endblock content%}
