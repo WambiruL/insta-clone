@@ -57,15 +57,32 @@
         </div>
     </div>  
     
-    {% for image in images %}
-            <div class="card mb-4">
-                <div class="card-title">
-                    <img src="{{user.profile.profile_image.url}}" class="rounded-circle border ml-3 mt-2  mr-3" alt="{{image.user.user.username}}" width="35" height="35">
-                    <a href="{% url 'profile' %}"><p style="position: relative; left: 70px; bottom: 30px;">{{image.user.user.username}}</p></a>
-                </div>
-                <div class="" style="max-width: 650px; display: block;margin-left: auto; margin-right: auto;">
-                    <img class="card-img-top" src="{{image.image.url}}"><br>
+   
+{% if images %}
+<h1>My posted images</h1>
+<div class="row">
 
-    {%endfor%}
+
+{% for image in images %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{{ image.image.url }}"  />
+            <div class="card-body">
+                <!-- <h5 class="card-title"></h5> -->
+                </a>
+            </div>
+            <small class="text-muted">Posted : {{image.pub_date|timesince}}</small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+
+{% else %}
+
+<h5> There are still no images for user : {{user.username}}</h5>
+
+{% endif %}
 </div>
 {%endblock content%}

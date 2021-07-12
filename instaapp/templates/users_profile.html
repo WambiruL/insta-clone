@@ -1,61 +1,48 @@
 {% extends 'index.html' %}
-{% load crispy_forms_tags %}
-{%load bootstrap4%}
 {% block content %}
-<div class="container" style="margin-top:8%">
-    <div class="content-section">
-        <div class="media">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                        <img class="rounded-circle account-img" src="{{ user_prof.profile.profile_image.url }}">
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="media-body">
-                            <div class="account-heading">
-                                <span class="mr-3 text-secondary username">{{ user_prof.username }}</span>
-                                {% if follow_status %}
-                                <a class="btn btn-sm btn-outline-danger ml-5" href="{% url 'unfollow' user_prof.profile.id %}">Unfollow</a>
 
-                                {%else%}
+<div class="container " id="profile" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+    <h3 >Profile</h3>
 
-                                <a class="btn btn-sm btn-primary ml-5" href="{% url 'follow' user_prof.profile.id %}">Follow</a>
-                                {% endif %}
-                
-                                
-                            </div>
-                        </div>
+    {% if user.is_authenticated %}
+    <p>Username: {{user.username}}<br>
+        Bio: {{user.profile.bio}}<br>
+        <img src="{{user.profile.profile_image.url}}" width="240" style="border-radius: 25px">
+        <br>
+        <br>
 
-                        <div class="post-details mt-3 mb-3">
-                            <span class="mr-5"><strong>{{user_posts.count}}</strong> Posts</span>
-                            <span class="mr-5"> <strong>{{ user_prof.profile.followers.count }}</strong> followers</span>
-                            <span class="mr-5"> <strong>{{ user_prof.profile.following.count }}</strong> following</span>
-                        </div>
-                        <h5>{{ user.profile.name }}</h5>
-                        <p class="text-secondary">{{ user.profile.bio }}</p>
-                    </div>
-                </div>
+        <a href=""> <button type="button" class="btn btn-primary btn-sm">Following</button></a>
+        <a href=""> <button type="button" class="btn btn-success btn-sm">Followers</button></a>
+
+        {% endif %}
+
+        <hr>
+        <div class="container" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+
+            {% if images %}
+            <h1>My posted images</h1>
+            <div class="row">
+
+                {% for image in images %}
+                <div class="col-md-4">
+                    <div class="card mb-2">
+                        <img class="card-img-top" src="{{ image.image.url }}"/>
+                        <div class="card-body">
+                <!-- <h5 class="card-title"></h5> -->
+                </a>
             </div>
+            <small class="text-muted">Posted : {{image.created_on|timesince}}</small>
         </div>
     </div>
-    <hr class="mt-4">
-    <div class="card-columns">
-        {% for image in user_posts %}
-        <div class="card">
-            <div class="card-body parent ">
-                <div class="im">
-                <img src="{{image.image.url}}" alt="{{image.caption}}" class="card-img">
-                <p id="overlay"class="text"> 
-                    <i class="fas fa-heart" style="color:white; font-size: 18"></i> 
-                    <span style="color: white">{{image.likes.count}}</span>
-                     <i class="fas fa-comment ml-4" style="color: white"></i> <span style="color: white">{{image.comments.count}}</span></p>
-            
-                    </div>
-                    </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+    {% endfor %}
+
+
+{% else %}
+
+<h5> There are still no images for user : {{user.username}}</h5>
+
+{% endif %}
+<hr>
 
 {% endblock %}
+</div>

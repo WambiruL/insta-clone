@@ -39,11 +39,8 @@ class Image(models.Model):
     caption=models.CharField(max_length=250,blank=True)
     pub_date=models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True, blank=True)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True, )
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
     
-    
-
-
     class Meta:
         ordering=['-pk']
 
@@ -70,7 +67,7 @@ class Comment(models.Model):
     comment = models.TextField()
     post= models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
-    created = models.DateTimeField(auto_now_add=True, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f'{self.user.name} Post'

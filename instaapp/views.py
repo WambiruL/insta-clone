@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Image, Profile, Follow
 from django.contrib.auth.models import User
@@ -7,6 +6,9 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.template.loader import render_to_string
+from django.views.generic.list import ListView
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
 # Create your views here.
@@ -128,26 +130,42 @@ def like_post(request):
         return JsonResponse({'form': html})
 
 
-def user_profile(request, username):
-    user_prof = get_object_or_404(User, username=username)
-    if request.user == user_prof:
-        return redirect('profile', username=request.user.username)
-    user_posts = user_prof.profile.posts.all()
+def user_profile(request):
+    current_user = request.user
+   
+    # image =  Image.objects.all()
+    try:
+        profile = Profile.objects.get(user=current_user)
+        
+    except: 
+        ObjectDoesNotExist
+    print(profile.bio)
     
-    followers = Follow.objects.filter(followed=user_prof.profile)
-    follow_status = None
-    for follower in followers:
-        if request.user.profile == follower.follower:
-            follow_status = True
-        else:
-            follow_status = False
-    params = {
-        'user_prof': user_prof,
-        'user_posts': user_posts,
-        'followers': followers,
-        'follow_status': follow_status
+    context = {
+        
+        'profile':profile,
+        
+        'current_user':current_user
     }
-    print(followers)
-    return render(request, 'user_profile.html', params)
+        
+    return render(request,'users_profile.html', context)
 
+class AppListView(ListView):
+    model = Image
+    template_name = 'index.html' 
+
+def unfollow(request, to_unfollow):
+    if request.method == 'GET':
+        user_profile2 = Profile.objects.get(pk=to_unfollow)
+        unfollow_d = Follow.objects.filter(follower=request.user.profile, followed=user_profile2)
+        unfollow_d.delete()
+        return redirect('user_profile', user_profile2.user.username)
+
+
+def follow(request, to_follow):
+    if request.method == 'GET':
+        user_profile3 = Profile.objects.get(pk=to_follow)
+        follow_s = Follow(follower=request.user.profile, followed=user_profile3)
+        follow_s.save()
+        return redirect('user_profile', user_profile3.user.username)
 

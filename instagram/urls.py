@@ -20,10 +20,9 @@ from django.conf import settings
 from django.contrib.auth import views 
 
 urlpatterns = [
-    url(r'account/', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
-   
     url(r'^logout/$', views.logout, {"next_page": '/accounts/login'}),
+    
     url(r'',include('instaapp.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     
