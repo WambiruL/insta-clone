@@ -1,6 +1,6 @@
 import re
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Image, Profile
+from .models import Image, Profile, Follow
 from django.contrib.auth.models import User
 from .forms import ImageForm, CommentForm, UserUpdateForm,ProfleUpdateForm, CreateUserForm
 from django.http import HttpResponseRedirect, JsonResponse
@@ -37,6 +37,7 @@ def LoginPage(request):
     context={}
     return render(request, 'registration/login.html',context)
 
+@login_required(login_url='/login')
 def index(request):
     images = Image.objects.all()
     users = User.objects.exclude(id=request.user.id)
@@ -127,5 +128,26 @@ def like_post(request):
         return JsonResponse({'form': html})
 
 
+def user_profile(request, username):
+    user_prof = get_object_or_404(User, username=username)
+    if request.user == user_prof:
+        return redirect('profile', username=request.user.username)
+    user_posts = user_prof.profile.posts.all()
+    
+    followers = Follow.objects.filter(followed=user_prof.profile)
+    follow_status = None
+    for follower in followers:
+        if request.user.profile == follower.follower:
+            follow_status = True
+        else:
+            follow_status = False
+    params = {
+        'user_prof': user_prof,
+        'user_posts': user_posts,
+        'followers': followers,
+        'follow_status': follow_status
+    }
+    print(followers)
+    return render(request, 'user_profile.html', params)
 
 
