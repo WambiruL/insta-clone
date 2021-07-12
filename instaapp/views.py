@@ -3,10 +3,10 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Image, Profile
 from django.contrib.auth.models import User
 from .forms import ImageForm, CommentForm, UserUpdateForm,ProfleUpdateForm, CreateUserForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -37,7 +37,6 @@ def LoginPage(request):
     context={}
     return render(request, 'registration/login.html',context)
 
-@login_required(login_url='/accounts/login')
 def index(request):
     images = Image.objects.all()
     users = User.objects.exclude(id=request.user.id)
@@ -107,5 +106,24 @@ def post_comment(request, id):
         'form': form,
     }
     return render(request, 'single_image.html', params)
+
+def like_post(request):
+    image = get_object_or_404(Image, id=request.POST.get('id'))
+    is_liked = False
+    if image.likes.filter(id=request.user.id).exists():
+        image.likes.remove(request.user)
+        is_liked = False
+    else:
+        image.likes.add(request.user)
+        is_liked = False
+
+    params = {
+        'image': image,
+        'is_liked': is_liked,
+        'total_likes': image.total_likes()
+    }
+    if request.is_ajax():
+        html = render_to_string('like_post.html', params, request=request)
+        return JsonResponse({'form': html})
 
 

@@ -39,6 +39,10 @@ class Image(models.Model):
     caption=models.CharField(max_length=250,blank=True)
     pub_date=models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True, )
+    
+    
+
 
     class Meta:
         ordering=['-pk']
