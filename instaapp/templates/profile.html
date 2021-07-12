@@ -1,5 +1,6 @@
 {%extends 'index.html'%}
 {% load crispy_forms_tags %}
+{%load bootstrap4%}
 {%block content%}
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg">
@@ -18,7 +19,7 @@
         <div class="media-body">
             <h2 class="account-heading">{{user.username}}</h2>
             <p class="text-secondary">{{user.email}}</p>
-            <p class="text-danger">{{user.bio}}</p>
+            <p class="text-danger">{{user.profile..bio}}</p>
             <ul>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">More options<span class="caret"></span></a>
@@ -53,7 +54,6 @@
                 </form>
             </div>
         </div>
-    </div>
-   
+    </div>   
 </div>
 {%endblock content%}

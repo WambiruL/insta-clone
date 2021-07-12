@@ -6,3 +6,6 @@ body{
 .col-md-5{
     position: relative;
 }
+.form{
+    width: 50px;
+}

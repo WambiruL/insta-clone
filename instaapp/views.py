@@ -1,12 +1,43 @@
+import re
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Image, Profile
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from .forms import ImageForm, CommentForm, UserUpdateForm,ProfleUpdateForm
+from .forms import ImageForm, CommentForm, UserUpdateForm,ProfleUpdateForm, CreateUserForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def registerPage(request):
+    form=CreateUserForm()
+
+    if request.method=='POST':
+        form=CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect('index')
+
+    context={'form':form}
+    return render(request, 'registration/registration_form.html',context)
+
+def LoginPage(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user=authenticate(request,username=username,password=password)
+
+        if user is not None:
+            login(request,username)
+        return redirect('index')
+
+    context={}
+    return render(request, 'registration/login.html',context)
+
+@login_required(login_url='/accounts/login')
 def index(request):
     images = Image.objects.all()
     users = User.objects.exclude(id=request.user.id)

@@ -10,15 +10,16 @@
                 <div class="card-body mb-3 mr-3 ml-3">
                     <form action="" method="post" novalidate>
                         {% csrf_token %}
-                        {% bootstrap_form form%}
+                        {% for field in form %}
+    {% bootstrap_field field %}
+{% endfor %}
                         <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
                     </form>
                 </div>
-                <a href="" class="D-block mx-auto mb-3">Forgot password? </a>
             </div>
             <div class="card mt-2">
                 <div class="card-body mt-3 mb-3 mr-2 ml-4">
-                    Don't have an account? <a href="">Sign up</a>
+                    Don't have an account? <a href="{%url 'register'%}">Sign up</a>
                 </div>
             </div>
             <div class="container">

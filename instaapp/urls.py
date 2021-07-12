@@ -1,7 +1,10 @@
 from . import views
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 urlpatterns=[
+    url(r'register/', views.registerPage, name='register'),
+     url(r'login/', views.LoginPage, name='login'),
+    url(r'account/', include('django.contrib.auth.urls')),
     url(r'^$',views.index,name = 'index'),
     url(r'^search/', views.search, name='search'),
     url(r'^profile/<username>/', views.profile, name='profile'),
