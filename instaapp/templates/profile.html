@@ -4,7 +4,7 @@
 {%block content%}
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" style="color: black;" href="#"><h3><strong>INSTAGRAM</strong></h3></a>
+    <a class="navbar-brand" style="color: black;" href="{% url 'index' %}"><h3><strong>INSTAGRAM</strong></h3></a>
 
     <!--Search-->
 
@@ -19,7 +19,6 @@
         <div class="media-body">
             <h2 class="account-heading">{{user.username}}</h2>
             <p class="text-secondary">{{user.email}}</p>
-            <p class="text-danger">{{user.profile..bio}}</p>
             <ul>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">More options<span class="caret"></span></a>
@@ -36,6 +35,8 @@
                   </ul>
                 </li>
             </ul>
+            <p class="text-danger">BIO:{{user.profile.bio}}</p>
+            
         </div>
         
     </div>
@@ -54,6 +55,17 @@
                 </form>
             </div>
         </div>
-    </div>   
+    </div>  
+    
+    {% for image in images %}
+            <div class="card mb-4">
+                <div class="card-title">
+                    <img src="{{user.profile.profile_image.url}}" class="rounded-circle border ml-3 mt-2  mr-3" alt="{{image.user.user.username}}" width="35" height="35">
+                    <a href="{% url 'profile' %}"><p style="position: relative; left: 70px; bottom: 30px;">{{image.user.user.username}}</p></a>
+                </div>
+                <div class="" style="max-width: 650px; display: block;margin-left: auto; margin-right: auto;">
+                    <img class="card-img-top" src="{{image.image.url}}"><br>
+
+    {%endfor%}
 </div>
 {%endblock content%}

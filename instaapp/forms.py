@@ -30,7 +30,7 @@ class ProfleUpdateForm(forms.ModelForm):
 
     class Meta:
         model=Profile
-        fields=['profile_image']
+        fields=['profile_image', 'bio']
 
 class CreateUserForm(UserCreationForm):
     class Meta:

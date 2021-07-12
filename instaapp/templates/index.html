@@ -5,11 +5,11 @@
   
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   {% endblock %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   
 
 
@@ -17,13 +17,12 @@
 
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" style="color: black;" href="#"><h3><strong>INSTAGRAM</strong></h3></a>
+    <a class="navbar-brand" style="color: black;" href="{%url 'index' %}"><h3><strong>INSTAGRAM</strong></h3></a>
 
     <!--Search-->
 
     <form class="mb-0 h1 ml-auto mr-auto" role="search" action="{% url 'search' %}" >
         <input name="search_user" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search">
-       <i class="spinner "></i>
    </form>
 </nav>
 
@@ -69,7 +68,8 @@
                     <a href="{% url 'profile' %}"><p style="position: relative; left: 70px; bottom: 30px;">{{image.user.user.username}}</p></a>
                 </div>
                 <div class="" style="max-width: 650px; display: block;margin-left: auto; margin-right: auto;">
-                    <img class="card-img-top" src="{{image.image.url}}"> <br>
+                    <img class="card-img-top" src="{{image.image.url}}"><br>
+
 
                     <div class="iconic ml-2">
                         <button class="btn btn-sm" type="submit" name="image_id" value="{{image.id}}">
@@ -112,9 +112,27 @@
                     <span class=" text-secondary">
                     <span class=" inname" style="color: black;"><a href="{% url 'profile' %}">{{ user.username }}</a></span>
                 </div>
+            </div><br>
+            <h2>SUGGESTIONS</h2>
+                <div class="col-md-2">
+                    {% for user in users %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2 mr-3 mt-1 mb-2">
+                                <img class="rounded-circle" src="{{ user.profile.profile_image.url }}" width="45px" height="45px">
+                            </div>
+                            <div class="col-md-6">
+                                <span class="inname" style="position: relative; left: 70px; bottom: 50px;"><a href="{% url 'profile' %}">{{user.username}}</a></span>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
             </div>
-                <div class="col-md-2"></div>
-            </div>
+            
         </div>
     </div>
 </div>
