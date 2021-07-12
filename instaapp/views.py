@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Image, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from .forms import ImageForm, CommentForm
+from .forms import ImageForm, CommentForm, UserUpdateForm,ProfleUpdateForm
 from django.http import HttpResponseRedirect
 
 
@@ -39,20 +39,12 @@ def search(request):
     return render(request, 'search.html', {'message': message})
 
 def profile(request):
-    current_user = request.user
-    images =  Image.objects.filter(profile = current_user.profile)
-    try:
-        profile = Profile.objects.get(user = current_user)
-        
-    except: 
-        ObjectDoesNotExist
-    print(profile.bio)
-    
-    context = {
-        
-        'profile':profile,
-        'images':images,
-        'current_user':current_user
+    u_form=UserUpdateForm()
+    p_form=ProfleUpdateForm()
+
+    context={
+        'u_form':u_form,
+        'p_form':p_form
     }
         
     return render(request,'profile.html', context)

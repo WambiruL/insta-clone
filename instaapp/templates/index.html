@@ -85,6 +85,10 @@
                     {% empty %}
                     {% endfor %}
                     <p class="text-secondary ml-4">{{image.created|timesince}}</p>
+                    <div class='commentsection'>
+                        <input type='text' id='cmnt' placeholder='Add a comment...'>
+                        <span class='dot02'></span>
+                    </div>
                 </div>
             </div>
             {% endfor %}    
@@ -98,7 +102,7 @@
                 </div>
                 <div class="col-md-6 user-detail">
                     <span class=" text-secondary">
-                    <span class=" inname" style="color: black;">{{ user.profile.user }}</span>
+                    <span class=" inname" style="color: black;"><a href="{% url 'user_profile' %}">{{ user.username }}</a></span>
                 </div>
             </div>
                 <div class="col-md-2"></div>

@@ -10,5 +10,11 @@
             <p class="text-danger">{{user.bio}}</p>
         </div>
     </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% u_bootstrap_form form %}
+        {% p_bootstrap_form form %}
+        <button type="submit" class="btn btn-primary btn-sm">Update Profile</button>
+    </form>
 </div>
 {%endblock content%}
