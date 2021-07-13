@@ -26,21 +26,8 @@ def registerPage (request):
     context={'form':form}
     return render(request, 'registration/registration_form.html',context)
 
-def LoginPage(request):
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
 
-        user=authenticate(request,username=username,password=password)
-
-        if user is not None:
-            login(request,username)
-        return redirect('index')
-
-    context={}
-    return render(request, 'registration/login.html',context)
-
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def index(request):
     images = Image.objects.all()
     users = User.objects.exclude(id=request.user.id)
