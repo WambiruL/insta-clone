@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout, {"next_page": '/accounts/login'}),
     
     url(r'',include('instaapp.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
+    
     
 ]
 
