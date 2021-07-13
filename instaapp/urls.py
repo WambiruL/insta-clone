@@ -3,9 +3,8 @@ from django.conf.urls import url, include
 
 urlpatterns=[
    url(r'accounts/', include('django.contrib.auth.urls')),
-    url(r'register/', views.registerPage, name='register'),
+    
     url(r'^$',views.index,name = 'index'),
-    url(r'login/', views.LoginPage, name='login'), 
     
     
     url(r'^search/', views.search, name='search'),
