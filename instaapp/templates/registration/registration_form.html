@@ -14,6 +14,7 @@
                     <p class="text-center">Sign up to see photos and videos from your friends.
                     </p>
                     <form method="post" novalidate>
+                        {% csrf_token %}
                         {% bootstrap_form form %}
                         <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
                     </form>
