@@ -8,11 +8,12 @@ from django.contrib.auth import authenticate,login,logout
 from django.template.loader import render_to_string
 from django.views.generic.list import ListView
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import UserCreationForm
 
 
 
 # Create your views here.
-def registerPage(request):
+def registerPage (request):
     form=CreateUserForm()
 
     if request.method=='POST':

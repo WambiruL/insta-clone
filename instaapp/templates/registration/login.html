@@ -1,5 +1,5 @@
 {%extends "registration/base.html"%}
-{% load bootstrap4 %}
+{% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
 <div class="container-log mt-4">
@@ -10,9 +10,7 @@
                 <div class="card-body mb-3 mr-3 ml-3">
                     <form action="" method="post" novalidate>
                         {% csrf_token %}
-                        {% for field in form %}
-    {% bootstrap_field field %}
-{% endfor %}
+                        {{form|crispy}}
                         <button type="submit" class="btn btn-primary btn-sm D-block mx-auto"> Log In</button>
                     </form>
                 </div>

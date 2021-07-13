@@ -13,8 +13,7 @@
                 <div class="card-body mb-3 mr-3 ml-3">
                     <p class="text-center">Sign up to see photos and videos from your friends.
                     </p>
-                    <form action="" method="post" novalidate>
-                        {% csrf_token %}
+                    <form method="post" novalidate>
                         {% bootstrap_form form %}
                         <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
                     </form>
